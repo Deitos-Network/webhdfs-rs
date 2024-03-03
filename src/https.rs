@@ -16,11 +16,11 @@ impl From<HttpsConfig> for HttpsSettings {
     }
 }
 
-pub type HttpsSettingsPtr = std::rc::Rc<HttpsSettings>;
+pub type HttpsSettingsPtr = std::sync::Arc<HttpsSettings>;
 
 #[inline]
 pub fn https_settings_ptr(https_settings: HttpsSettings) -> HttpsSettingsPtr {
-    std::rc::Rc::new(https_settings)
+    std::sync::Arc::new(https_settings)
 }
 
 pub fn https_connector(cfg: &HttpsSettingsPtr) -> HttpsConnectorType {

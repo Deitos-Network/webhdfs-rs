@@ -322,7 +322,7 @@ impl HttpyClient {
 
     /// two-step data retrieval request, no input, binary output.
     /// returns pointer
-    pub async fn get_binary(self) -> Result<Box<dyn Stream<Item=Result<Bytes>> + Unpin>> {
+    pub async fn get_binary(self) -> Result<Box<impl Stream<Item=Result<Bytes>> + Unpin>> {
         let Self { endpoint, natmap } = self;
         let uri = HttpyClient::redirect_uri(endpoint, Method::GET, natmap).await?;
         let result = HttpxClient::new_get_like(uri, Method::GET).await?;

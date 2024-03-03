@@ -114,7 +114,7 @@ impl SyncHdfsClient {
     }
 
     /// Open a file for reading
-    pub fn open(&mut self, path: &str, open_options: OpenOptions) -> Result<Box<dyn Stream<Item=Result<Bytes>>+Unpin>> {
+    pub fn open(&mut self, path: &str, open_options: OpenOptions) -> Result<Box<impl Stream<Item=Result<Bytes>>+Unpin>> {
         let fs = self.acx.open(self.fostate, path, open_options);
         let r = self.exec0(fs)?;
         self.foresult(r)

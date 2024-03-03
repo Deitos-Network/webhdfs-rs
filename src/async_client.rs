@@ -366,7 +366,7 @@ impl HdfsClient {
     }
 
     /// Read file data
-    pub async fn open(&self, fostate: FOState, path: &str, opts: OpenOptions) -> FOResult<Box<dyn Stream<Item=Result<Bytes>>+Unpin>> {
+    pub async fn open(&self, fostate: FOState, path: &str, opts: OpenOptions) -> FOResult<Box<impl Stream<Item=Result<Bytes>>+Unpin>> {
         with_failover!(
             [
                 |r: HttpyClient| r.get_binary(),
